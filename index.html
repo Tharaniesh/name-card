@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1
+<title>KORVA Digital Business Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+    --blue:#0757f6;
+    --blue-dark:#003ab7;
+    --ink:#101b3d;
+    --muted:#64708a;
+    --line:#e6ebf5;
+    --soft:#f8fbff;
+}
+
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    background:#eef3ff;
+    font-family:"Inter",Arial,sans-serif;
+    color:var(--ink);
+}
+
+.card{
+    position:relative;
+    width:min(100vw,430px);
+    aspect-ratio:430/636;
+    overflow:hidden;
+    background:#fff;
+    border-radius:24px;
+    box-shadow:0 18px 48px rgba(11,31,78,.22);
+}
+
+.card::before,
+.card::after{
+    content:"";
+    position:absolute;
+    pointer-events:none;
+}
+
+.card::before{
+    inset:0 0 auto auto;
+    width:176px;
+    height:138px;
+    background:
+        radial-gradient(circle at 22px 24px, rgba(255,255,255,.2) 1px, transparent 2px) 0 0/26px 26px,
+        linear-gradient(135deg,var(--blue) 0%,#0047dd 58%,#0237aa 100%);
+    border-bottom-left-radius:38px;
+    clip-path:path("M0,0 H176 V105 C176,124 163,138 144,138 H95 C82,138 69,132 60,122 L0,58 Z");
+}
+
+.card::after{
+    left:-42px;
+    top:176px;
+    width:62px;
+    height:148px;
+    border-radius:32px;
+    background:linear-gradient(180deg,#0757f6,#0035af);
+}
+
+.top-wave{
+    position:absolute;
+    right:-8px;
+    top:90px;
+    width:106px;
+    height:82px;
+    background:linear-gradient(135deg,#0757f6,#0036b7);
+    border-top-left-radius:40px;
+    clip-path:path("M0,0 H105 V82 H64 C49,82 39,76 31,64 Z");
+}
+
+.pattern{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    opacity:.72;
+}
+
+.pattern svg{
+    position:absolute;
+    right:34px;
+    top:82px;
+    width:162px;
+    height:116px;
+}
+
+.logo{
+    position:absolute;
+    left:29px;
+    top:36px;
+    width:162px;
+    height:auto;
+}
+
+.tagline{
+    position:absolute;
+    left:30px;
+    top:79px;
+    font-size:8px;
+    font-weight:600;
+    letter-spacing:.95px;
+    color:#576178;
+}
+
+.s-badge{
+    position:absolute;
+    right:27px;
+    top:32px;
+    width:50px;
+    height:50px;
+    display:grid;
+    place-items:center;
+    border-radius:13px;
+    background:#fff;
+    color:var(--blue);
+    font-size:28px;
+    font-weight:800;
+    box-shadow:0 9px 18px rgba(3,35,123,.18);
+}
+
+.content{
+    position:relative;
+    z-index:2;
+    padding:107px 29px 0;
+}
+
+h1{
+    margin:0;
+    font-size:23px;
+    line-height:1;
+    font-weight:800;
+    letter-spacing:.1px;
+}
+
+.role{
+    margin-top:8px;
+    color:var(--blue);
+    font-size:11px;
+    line-height:1;
+    font-weight:800;
+}
+
+.accent{
+    width:33px;
+    height:3px;
+    margin:9px 0 14px;
+    border-radius:999px;
+    background:var(--blue);
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px 8px;
+}
+
+.tile{
+    min-height:57px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px 13px;
+    text-decoration:none;
+    color:inherit;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:8px;
+    box-shadow:0 4px 12px rgba(24,50,94,.08);
+}
+
+.tile.website{
+    grid-column:1 / -1;
+}
+
+.icon{
+    flex:0 0 auto;
+    width:34px;
+    height:34px;
+    display:grid;
+    place-items:center;
+    border:1.4px solid var(--blue);
+    border-radius:50%;
+    color:var(--blue);
+}
+
+.icon svg{
+    width:18px;
+    height:18px;
+    stroke:currentColor;
+    stroke-width:1.9;
+    fill:none;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.label{
+    display:block;
+    font-size:10px;
+    font-weight:800;
+    line-height:1.1;
+}
+
+.value{
+    display:block;
+    margin-top:5px;
+    max-width:112px;
+    color:#5f6981;
+    font-size:8px;
+    font-weight:500;
+    line-height:1.2;
+    overflow-wrap:anywhere;
+}
+
+.chev{
+    margin-left:auto;
+    color:var(--blue);
+    font-size:19px;
+    font-weight:800;
+}
+
+.section-title{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin:12px 0 7px;
+    color:var(--blue);
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1.25px;
+}
+
+.section-title::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+}
+
+.section-title span{
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:var(--blue);
+}
+
+.products{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px 8px;
+}
+
+.product{
+    min-height:50px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:#fff;
+    box-shadow:0 4px 12px rgba(24,50,94,.07);
+}
+
+.product .icon{
+    width:30px;
+    height:30px;
+    border:0;
+    border-radius:0;
+}
+
+.product .icon svg{
+    width:28px;
+    height:28px;
+    stroke-width:1.6;
+}
+
+.product h2{
+    margin:0;
+    font-size:10px;
+    line-height:1;
+    font-weight:800;
+}
+
+.product p{
+    margin:5px 0 0;
+    color:#5f6981;
+    font-size:7.2px;
+    font-weight:500;
+    line-height:1.1;
+}
+
+.mini-next{
+    margin-left:auto;
+    width:17px;
+    height:17px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:#eef4ff;
+    color:var(--blue);
+    font-size:13px;
+    font-weight:800;
+}
+
+.catalog{
+    position:relative;
+    min-height:48px;
+    margin-top:9px;
+    padding:8px 13px 8px 57px;
+    display:flex;
+    align-items:center;
+    color:#fff;
+    text-decoration:none;
+    border-radius:8px;
+    overflow:hidden;
+    background:linear-gradient(135deg,#0647d8,#0757f6 72%,#003ab8);
+    box-shadow:0 7px 14px rgba(4,75,220,.22);
+}
+
+.catalog::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 70% 35%, rgba(255,255,255,.24) 1px, transparent 2px),
+        linear-gradient(130deg, transparent 0 54%, rgba(255,255,255,.12) 55%, transparent 56%);
+    opacity:.65;
+}
+
+.pdf{
+    position:absolute;
+    left:15px;
+    width:29px;
+    height:34px;
+    display:grid;
+    place-items:end center;
+    padding-bottom:6px;
+    border-radius:3px;
+    background:#fff;
+    color:var(--blue);
+    font-size:7px;
+    font-weight:800;
+    z-index:1;
+}
+
+.catalog-copy{
+    position:relative;
+    z-index:1;
+}
+
+.catalog-title{
+    font-size:12px;
+    font-weight:800;
+    line-height:1;
+}
+
+.catalog-sub{
+    margin-top:6px;
+    font-size:8px;
+    font-weight:500;
+    opacity:.92;
+}
+
+.catalog .round-next{
+    position:relative;
+    z-index:1;
+    margin-left:auto;
+    width:27px;
+    height:27px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:#fff;
+    color:var(--blue);
+    font-size:21px;
+    font-weight:800;
+}
+
+.connect{
+    margin-top:9px;
+    min-height:72px;
+    display:grid;
+    grid-template-columns:84px 1fr 151px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+    background:#fff;
+}
+
+.qr-wrap{
+    display:grid;
+    place-items:center;
+    border-right:1px solid var(--line);
+}
+
+.qr{
+    width:64px;
+    height:64px;
+    object-fit:cover;
+}
+
+.scan{
+    padding:14px 10px 10px;
+}
+
+.scan-title{
+    font-size:10px;
+    font-weight:800;
+}
+
+.scan-line{
+    width:42px;
+    height:2px;
+    margin:6px 0 7px;
+    background:var(--blue);
+    border-radius:99px;
+}
+
+.scan-text{
+    max-width:100px;
+    color:#5f6981;
+    font-size:7.5px;
+    line-height:1.35;
+    font-weight:500;
+}
+
+.quick{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border-left:1px solid var(--line);
+}
+
+.quick a{
+    min-height:24px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    padding:0 8px;
+    border-bottom:1px solid var(--line);
+    color:#2b3651;
+    text-decoration:none;
+    font-size:6.8px;
+    font-weight:500;
+}
+
+.quick a:nth-last-child(-n+2){
+    border-bottom:0;
+}
+
+.quick svg{
+    width:13px;
+    height:13px;
+    color:var(--blue);
+    stroke:currentColor;
+    stroke-width:1.8;
+    fill:none;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 30px 0;
+    color:#5f6981;
+    font-size:7.8px;
+    font-weight:500;
+}
+
+.footer strong{
+    color:var(--blue);
+    font-weight:700;
+}
+
+@media (max-width:429px){
+    body{align-items:start;background:#fff}
+    .card{
+        width:100vw;
+        border-radius:0;
+        box-shadow:none;
+    }
+}
+.s-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Ensures the image doesn't bleed outside the badge borders */
+  width: 40px;      /* Adjust based on your current badge size */
+  height: 40px;     /* Adjust based on your current badge size */
+}
+
+.s-badge-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Maintains aspect ratio without clipping */
+}
+
+</style>
+</head>
+<body>
+<main class="card" aria-label="KORVA digital business card">
+    <div class="top-wave"></div>
+    <div class="pattern" aria-hidden="true">
+        <svg viewBox="0 0 180 130">
+            <path d="M7 42h32l23-23h41" stroke="#dce7fb" stroke-width="1.2" fill="none"/>
+            <path d="M19 67h26l18-18h48" stroke="#dce7fb" stroke-width="1.2" fill="none"/>
+            <path d="M53 101V75h20l21-21h36" stroke="#dce7fb" stroke-width="1.2" fill="none"/>
+            <path d="M78 119V92h21l17-17h43" stroke="#dce7fb" stroke-width="1.2" fill="none"/>
+            <path d="M118 109V89h22" stroke="#dce7fb" stroke-width="1.2" fill="none"/>
+            <circle cx="42" cy="42" r="2" fill="#dce7fb"/><circle cx="103" cy="19" r="2" fill="#dce7fb"/>
+            <circle cx="111" cy="49" r="2" fill="#dce7fb"/><circle cx="130" cy="54" r="2" fill="#dce7fb"/>
+            <circle cx="159" cy="75" r="2" fill="#dce7fb"/><circle cx="118" cy="109" r="2" fill="#dce7fb"/>
+            <circle cx="78" cy="119" r="2" fill="#dce7fb"/><circle cx="53" cy="101" r="2" fill="#dce7fb"/>
+        </svg>
+    </div>
+
+    <img src="assets/logo.png" alt="KORVA" class="logo">
+    <div class="tagline">SIVO SMART TECHNOLOGIES PVT LTD</div>
+    <div class="s-badge">
+        <img src="assets/sivo_logo.png" alt="Sivo Logo" class="s-badge-logo">
+    </div>
+
+
+    <section class="content">
+        <h1>SIVAPRAKASH. S</h1>
+        <div class="role">CEO &amp; FOUNDER</div>
+        <div class="accent"></div>
+
+        <div class="contact-grid">
+            <a class="tile" href="tel:+916385152054">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7A2 2 0 0 1 22 16.9z"/></svg></span>
+                <span><span class="label">Call</span><span class="value">+91 63851 52054</span></span>
+            </a>
+            <a class="tile" href="https://wa.me/916385152054">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 21l1.4-4A9 9 0 1 1 8 20.1L3 21z"/><path d="M9 9.5c.5 2 2.1 3.8 4.2 4.6l1.4-1.3 2 .5"/></svg></span>
+                <span><span class="label">WhatsApp</span><span class="value">Chat now</span></span>
+            </a>
+            <a class="tile" href="mailto:siva@sivosmarttech.com">
+                <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+                <span><span class="label">Email</span><span class="value">siva@sivosmarttech.com</span></span>
+            </a>
+            <a class="tile" href="https://maps.google.com/?q=Coimbatore%2C%20TN">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                <span><span class="label">Location</span><span class="value">Coimbatore, TN</span></span>
+            </a>
+            <a class="tile website" href="https://sivosmarttech.com">
+                <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span>
+                <span><span class="label">Website</span><span class="value">sivosmarttech.com</span></span>
+                <span class="chev">›</span>
+            </a>
+        </div>
+
+        <div class="section-title">OUR PRODUCTS <span></span></div>
+
+        <div class="products">
+            <article class="product">
+                <span class="icon"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10"/><rect x="4" y="4" width="16" height="16"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg></span>
+                <span><h2>CORE</h2><p>Smart Controller</p></span><span class="mini-next">›</span>
+            </article>
+            <article class="product">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M5 19h14V5h-4v4H9v4H5z"/><path d="M8 19v3M14 19v3M19 8h3M19 14h3M2 14h3M9 9h.1M14 14h.1"/></svg></span>
+                <span><h2>CORE HAT</h2><p>Expansion Module</p></span><span class="mini-next">›</span>
+            </article>
+            <article class="product">
+                <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a8 8 0 0 0 .1-2l2-1.5-2-3.5-2.4 1a8 8 0 0 0-1.7-1L15 5.4h-4L10.6 8a8 8 0 0 0-1.7 1l-2.4-1-2 3.5 2 1.5a8 8 0 0 0 .1 2l-2 1.5 2 3.5 2.4-1a8 8 0 0 0 1.7 1l.4 2.6h4l.4-2.6a8 8 0 0 0 1.7-1l2.4 1 2-3.5z"/></svg></span>
+                <span><h2>AUTO</h2><p>Automation Unit</p></span><span class="mini-next">›</span>
+            </article>
+            <article class="product">
+                <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="1"/><path d="M8 21h8M12 17v4M7 13l3-3 3 2 4-5"/></svg></span>
+                <span><h2>VISTA</h2><p>Display &amp; Interface</p></span><span class="mini-next">›</span>
+            </article>
+        </div>
+
+        <a class="catalog" href="assets/catalog.pdf" style="display:none;">
+            <span class="pdf">PDF</span>
+            <span class="catalog-copy"><span class="catalog-title">Product Catalog</span><span class="catalog-sub">KORVA full product line - PDF</span></span>
+            <span class="round-next">›</span>
+        </a>
+
+        <div class="connect">
+            <div class="qr-wrap"><img src="assets/qr.png" alt="QR code" class="qr"></div>
+            <div class="scan">
+                <div class="scan-title">Scan to Connect</div>
+                <div class="scan-line"></div>
+                <div class="scan-text">Tap QR to open all contact options instantly</div>
+            </div>
+            <nav class="quick" aria-label="Quick contact links">
+                <a href="tel:+916385152054"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7A2 2 0 0 1 22 16.9z"/></svg>Call</a>
+                <a href="https://wa.me/916385152054"><svg viewBox="0 0 24 24"><path d="M3 21l1.4-4A9 9 0 1 1 8 20.1L3 21z"/></svg>WhatsApp</a>
+                <a href="mailto:siva@sivosmarttech.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email</a>
+                <a href="https://sivosmarttech.com"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>Website</a>
+                <a href="https://maps.google.com/?q=Coimbatore%2C%20TN"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>Location</a>
+            </nav>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <span>sivosmarttech.com</span>
+        <strong>Smart. Simple. Sivo.</strong>
+    </footer>
+</main>
+</body>
+</html>
+
+                    Scan to Connect
+                </div>
+
+                <div class="qr-text">
+                    Open all contact options instantly
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <span>sivosmarttech.com</span>
+            <span>Smart. Simple. Sivo.</span>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
