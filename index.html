@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KORVA Digital Business Card</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -400,12 +400,14 @@ h1{
     display:grid;
     place-items:center;
     border-right:1px solid var(--line);
+    background:#fff;
 }
 
 .qr{
     width:64px;
     height:64px;
-    object-fit:cover;
+    display:block;
+    object-fit:contain;
 }
 
 .scan{
@@ -482,15 +484,47 @@ h1{
     font-weight:700;
 }
 
-@media (max-width:429px){
+@media (max-width:480px){
     body{align-items:start;background:#fff}
     .card{
         width:100vw;
+        min-height:100svh;
+        aspect-ratio:auto;
+        overflow:visible;
         border-radius:0;
         box-shadow:none;
     }
+
+    .connect{
+        grid-template-columns:96px minmax(0,1fr);
+        min-height:92px;
+    }
+
+    .qr{
+        width:76px;
+        height:76px;
+    }
+
+    .quick{
+        grid-column:1 / -1;
+        grid-template-columns:repeat(5,1fr);
+        border-top:1px solid var(--line);
+        border-left:0;
+    }
+
+    .quick a{
+        justify-content:center;
+        min-height:34px;
+        padding:0 4px;
+        border-bottom:0;
+        border-right:1px solid var(--line);
+    }
+
+    .quick a:last-child{
+        border-right:0;
+    }
 }
-    .s-badge {
+.s-badge {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -504,6 +538,7 @@ h1{
   max-height: 100%;
   object-fit: contain; /* Maintains aspect ratio without clipping */
 }
+
 </style>
 </head>
 <body>
@@ -528,6 +563,7 @@ h1{
     <div class="s-badge">
         <img src="assets/sivo_logo.png" alt="Sivo Logo" class="s-badge-logo">
     </div>
+
 
     <section class="content">
         <h1>SIVAPRAKASH. S</h1>
@@ -607,27 +643,5 @@ h1{
         <strong>Smart. Simple. Sivo.</strong>
     </footer>
 </main>
-</body>
-</html>
-
-                    Scan to Connect
-                </div>
-
-                <div class="qr-text">
-                    Open all contact options instantly
-                </div>
-            </div>
-
-        </div>
-
-        <div class="footer">
-            <span>sivosmarttech.com</span>
-            <span>Smart. Simple. Sivo.</span>
-        </div>
-
-    </div>
-
-</div>
-
 </body>
 </html>
