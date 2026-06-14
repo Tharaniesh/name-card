@@ -490,6 +490,20 @@ h1{
         box-shadow:none;
     }
 }
+    .s-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Ensures the image doesn't bleed outside the badge borders */
+  width: 40px;      /* Adjust based on your current badge size */
+  height: 40px;     /* Adjust based on your current badge size */
+}
+
+.s-badge-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Maintains aspect ratio without clipping */
+}
 </style>
 </head>
 <body>
@@ -511,7 +525,9 @@ h1{
 
     <img src="assets/logo.png" alt="KORVA" class="logo">
     <div class="tagline">SIVO SMART TECHNOLOGIES PVT LTD</div>
-    <div class="s-badge">S</div>
+    <div class="s-badge">
+        <img src="assets/sivo_logo.png" alt="Sivo Logo" class="s-badge-logo">
+    </div>
 
     <section class="content">
         <h1>SIVAPRAKASH. S</h1>
@@ -563,7 +579,7 @@ h1{
             </article>
         </div>
 
-        <a class="catalog" href="assets/catalog.pdf">
+        <a class="catalog" href="assets/catalog.pdf" style="display:none;">
             <span class="pdf">PDF</span>
             <span class="catalog-copy"><span class="catalog-title">Product Catalog</span><span class="catalog-sub">KORVA full product line - PDF</span></span>
             <span class="round-next">›</span>
